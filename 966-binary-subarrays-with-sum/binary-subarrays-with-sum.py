@@ -1,13 +1,13 @@
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        return self.atMost(nums, goal)- self.atMost(nums, goal-1)
-
-    def atMost(self, nums: List[int], goal: int) -> int:
-        head, tail, total, result = 0, 0, 0, 0
-        for head in range(len(nums)):
-            total += nums[head]
-            while total > goal and tail <= head:
-                total -= nums[tail]
-                tail += 1
-            result += head - tail + 1
-        return result
+        sums=0
+        freq={0:1}
+        counts=0
+        for right in range(len(nums)):
+            sums=sums+nums[right]
+            
+            diff=sums-goal
+            if diff in freq:
+                counts+=freq[diff]
+            freq[sums]=freq.get(sums,0)+1    
+        return counts        
