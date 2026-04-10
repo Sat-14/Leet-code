@@ -1,13 +1,18 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        a=len(nums)
-        m={}
-        for i in range(a):
-         
-         cc=target-nums[i]
-         if cc in m:
-            return [m[cc],i]
-         m[nums[i]]=i         
-         
+    
+        freq={}
+        r=[]
+        for i in range(len(nums)):
+            
+            t=target-nums[i]
+            if t in freq:
+                r.append(i)
+                r.append(freq[t])
+            freq[nums[i]]=i    
+            if len(r)==2:
+                return r    
+
+
             
             
